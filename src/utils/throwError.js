@@ -1,5 +1,5 @@
 const throwError = (status, message) => {
-  const error = new Error();
+  const error = Error();
   error.name = status;
   error.message = message;
   throw error;
