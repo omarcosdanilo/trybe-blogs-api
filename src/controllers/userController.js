@@ -18,6 +18,16 @@ const userController = {
       next(error);
     }
   },
+
+  async getAll(req, res, next) {
+    try {
+      const users = await userService.getAll();
+
+      res.status(200).json(users);
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = userController;

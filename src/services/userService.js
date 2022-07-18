@@ -33,6 +33,15 @@ const userService = {
       throwError(400, '"password" length must be at least 6 characters long');
     }
   },
+
+  async getAll() {
+    const users = await User.findAll({
+      attributes: { exclude: ['password'] },
+      raw: true,
+    });
+
+    return users;
+  },
 };
 
 module.exports = userService;
