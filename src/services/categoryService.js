@@ -8,6 +8,12 @@ const categoryService = {
     return category;
   },
 
+  async getAll() {
+    const categories = await Category.findAll({ raw: true });
+
+    return categories;
+  },
+
   async validateName(name) {
     if (!name) throwError(400, '"name" is required');
 
