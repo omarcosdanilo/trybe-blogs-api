@@ -24,13 +24,15 @@ const BlogPost = (sequelize, DataTypes) => {
         key: 'id'
       }
     },
-    published: {
+    createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      field: 'published'
     },
-    updated: {
+    updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      field: 'updated'
     }   
   });
 

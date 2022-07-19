@@ -1,0 +1,46 @@
+const { Op } = require('sequelize');
+const { Category, BlogPost, PostCategory } = require('../database/models');
+const throwError = require('../utils/throwError');
+
+const blogPostService = {
+  async validateCategories(categories) {
+    const { count } = await Category.findAndCountAll({
+      where: {
+        id: {
+          [Op.in]: categories,
+        },
+      },
+      raw: true,
+    });
+
+    if (count === 0) throwError(400, '"categoryIds" not found');
+
+    return true;
+  },
+
+  async validateFields(fields) {
+    const { title, content, categoryIds } = fields;
+
+    if (!title || !content || !categoryIds) throwError(400, 'Some required fields are missing');
+  },
+
+  async create(payload, user) {
+    const { title, content, categoryIds } = payload;
+    const { id: userId } = user;
+
+    const post = await BlogPost.create({ 
+      title, content, userId, 
+    }, { fields: ['title', 'content', 'userId'], raw: true });
+
+    const { id } = post;
+
+    await PostCategory.bulkCreate([
+      { postId: id, categoryId: categoryIds[0] },
+      { postId: id, categoryId: categoryIds[1] },
+    ], { fields: ['postId', 'categoryId'] });
+    
+    return post;
+  },
+};
+
+module.exports = blogPostService;
