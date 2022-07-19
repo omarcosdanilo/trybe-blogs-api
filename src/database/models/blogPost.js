@@ -24,17 +24,15 @@ const BlogPost = (sequelize, DataTypes) => {
         key: 'id'
       }
     },
-    createdAt: {
+    published: {
       allowNull: false,
       type: DataTypes.DATE,
-      field: 'published'
     },
-    updatedAt: {
+    updated: {
       allowNull: false,
       type: DataTypes.DATE,
-      field: 'updated'
     }   
-  });
+  }, { timestamps: false});
 
   BlogPost.associate = (models) => {
     BlogPost.belongsTo(models.User, {

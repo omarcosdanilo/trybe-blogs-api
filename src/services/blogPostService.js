@@ -29,8 +29,8 @@ const blogPostService = {
     const { id: userId } = user;
 
     const post = await BlogPost.create({ 
-      title, content, userId, 
-    }, { fields: ['title', 'content', 'userId'], raw: true });
+      title, content, userId, published: new Date(), updated: new Date(),
+    }, { raw: true });
 
     const { id } = post;
 
@@ -38,7 +38,7 @@ const blogPostService = {
       { postId: id, categoryId: categoryIds[0] },
       { postId: id, categoryId: categoryIds[1] },
     ], { fields: ['postId', 'categoryId'] });
-    
+
     return post;
   },
 };
