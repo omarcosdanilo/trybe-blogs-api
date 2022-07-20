@@ -42,31 +42,17 @@ const blogPostService = {
     return post;
   },
 
-  async format(data) {
-    const formated = data.map(
-      (item) => item.categories.map((category) => {
-        const { PostCategory, ...newObj } = category;
-        return { ...item, categories: [newObj] };
-      }),
-      );
-
-    return formated.reduce((acc, curValue) => acc.concat(curValue), []);
-  },
-
   async getAll() {
     const data = await BlogPost.findAll({
       include: [{
         model: User, as: 'user', attributes: { exclude: ['password'] },
       },
       {
-        model: Category, as: 'categories',
+        model: Category, as: 'categories', through: { attributes: [] },
       }],
     });
     
-    const unformated = data.map((item) => item.toJSON());
-    const formated = await this.format(unformated);
-
-    return formated;
+    return data;
   },
 };
 
