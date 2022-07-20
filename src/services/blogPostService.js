@@ -77,6 +77,31 @@ const blogPostService = {
 
     if (!title || !content || !categoryIds) throwError(400, 'Some required fields are missing');
   },
+
+  async validateUpdateFields(payload) {
+    const { title, content } = payload;
+
+    if (!title || !content) throwError(400, 'Some required fields are missing');
+
+    return true;
+  },
+
+  async validateUser(reqUser, post) {
+    const { userId } = post.toJSON();
+    const { id } = reqUser;
+
+    if (id !== userId) throwError(401, 'Unauthorized user');
+    
+    return true;
+  },
+
+  async update(post, { title, content }) {
+    const { id } = post.toJSON();
+
+    await BlogPost.update({ title, content }, {
+      where: { id },
+    });
+  },
 };
 
 module.exports = blogPostService;
