@@ -22,6 +22,19 @@ const blogPostController = {
       next(error);
     }
   },
+
+  async getById(req, res, next) {
+    try {
+      const { id } = req.params;
+
+      await blogPostService.exists(id);
+      const post = await blogPostService.getBydId(id);
+
+      res.status(200).json(post);
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = blogPostController;
