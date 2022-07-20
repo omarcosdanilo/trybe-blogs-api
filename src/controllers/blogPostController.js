@@ -12,6 +12,16 @@ const blogPostController = {
      next(error); 
     }
   },
+
+  async getAll(req, res, next) {
+    try {
+      const posts = await blogPostService.getAll();
+  
+      res.status(200).json(posts);
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = blogPostController;

@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Category, BlogPost, PostCategory } = require('../database/models');
+const { Category, BlogPost, PostCategory: postCategory, User } = require('../database/models');
 const throwError = require('../utils/throwError');
 
 const blogPostService = {
@@ -34,12 +34,39 @@ const blogPostService = {
 
     const { id } = post;
 
-    await PostCategory.bulkCreate([
+    await postCategory.bulkCreate([
       { postId: id, categoryId: categoryIds[0] },
       { postId: id, categoryId: categoryIds[1] },
     ], { fields: ['postId', 'categoryId'] });
 
     return post;
+  },
+
+  async format(data) {
+    const formated = data.map(
+      (item) => item.categories.map((category) => {
+        const { PostCategory, ...newObj } = category;
+        return { ...item, categories: [newObj] };
+      }),
+      );
+
+    return formated.reduce((acc, curValue) => acc.concat(curValue), []);
+  },
+
+  async getAll() {
+    const data = await BlogPost.findAll({
+      include: [{
+        model: User, as: 'user', attributes: { exclude: ['password'] },
+      },
+      {
+        model: Category, as: 'categories',
+      }],
+    });
+    
+    const unformated = data.map((item) => item.toJSON());
+    const formated = await this.format(unformated);
+
+    return formated;
   },
 };
 
