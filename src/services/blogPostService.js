@@ -21,6 +21,10 @@ const blogPostService = {
     return post;
   },
 
+  async delete(id) {
+    await BlogPost.destroy({ where: { id } });
+  },
+
   async exists(id) {
     const post = await BlogPost.findOne({ 
       where: { id },
@@ -43,7 +47,7 @@ const blogPostService = {
     return data;
   },
 
-  async getBydId(id) {
+  async getById(id) {
     const data = await BlogPost.findOne({
       where: { id },
       include: [{

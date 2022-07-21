@@ -13,6 +13,21 @@ const blogPostController = {
     }
   },
 
+  async delete(req, res, next) {
+    try {
+      const { id } = req.params;
+
+      await blogPostService.exists(id);
+      const post = await blogPostService.getById(id);
+      await blogPostService.validateUser(req.user, post);
+      await blogPostService.delete(id);
+
+      res.status(204).end();
+    } catch (error) {
+      next(error);
+    }
+  },
+
   async getAll(req, res, next) {
     try {
       const posts = await blogPostService.getAll();
@@ -41,7 +56,7 @@ const blogPostController = {
       const { id } = req.params;
 
       await blogPostService.validateUpdateFields(req.body);
-      const post = await blogPostService.getBydId(id);
+      const post = await blogPostService.getById(id);
       await blogPostService.validateUser(req.user, post);
       await blogPostService.update(post, req.body);
       const updated = await blogPostService.getBydId(id);
