@@ -34,6 +34,22 @@ const blogPostService = {
     if (!post) throwError(404, 'Post does not exist');
   },
 
+  async filter(searchTerm) {
+    const post = await BlogPost.findAll({ 
+      where: { 
+        [Op.or]: [{ title: searchTerm }, { content: searchTerm }],
+      },
+      include: [{
+        model: User, as: 'user', attributes: { exclude: ['password'] },
+      },
+      {
+        model: Category, as: 'categories', through: { attributes: [] },
+      }],
+    });
+
+    return post;
+  },
+
   async getAll() {
     const data = await BlogPost.findAll({
       include: [{

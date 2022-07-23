@@ -28,6 +28,24 @@ const blogPostController = {
     }
   },
 
+  async filter(req, res, next) {
+    try {
+      const { q } = req.query;
+
+      if (!q) {
+        const posts = await blogPostService.getAll();
+
+        return res.status(200).json(posts);
+      } 
+
+      const post = await blogPostService.filter(q);
+
+      res.status(200).json(post);
+    } catch (error) {
+      next(error);
+    }
+  },
+
   async getAll(req, res, next) {
     try {
       const posts = await blogPostService.getAll();
