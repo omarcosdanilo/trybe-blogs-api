@@ -19,6 +19,18 @@ const userController = {
     }
   },
 
+  async delete(req, res, next) {
+    try {
+      const { id } = req.user;
+
+      await userService.delete(id);
+      
+      res.status(204).end();
+    } catch (error) {
+      next(error);
+    }
+  },
+
   async getAll(req, res, next) {
     try {
       const users = await userService.getAll();

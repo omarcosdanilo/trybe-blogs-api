@@ -7,6 +7,11 @@ const userService = {
     const newUser = user.toJSON();
     return newUser;
   },
+
+  async delete(id) {
+    await User.destroy({ where: { id } });
+  },
+
   async exists(email) {
     const user = await User.findOne({ 
       where: { email },
