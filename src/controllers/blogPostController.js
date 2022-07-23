@@ -56,10 +56,11 @@ const blogPostController = {
       const { id } = req.params;
 
       await blogPostService.validateUpdateFields(req.body);
+      await blogPostService.exists(id);
       const post = await blogPostService.getById(id);
       await blogPostService.validateUser(req.user, post);
       await blogPostService.update(post, req.body);
-      const updated = await blogPostService.getBydId(id);
+      const updated = await blogPostService.getById(id);
 
       res.status(200).json(updated);
     } catch (error) {
