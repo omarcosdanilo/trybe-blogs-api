@@ -43,7 +43,7 @@ const blogPostController = {
       const { id } = req.params;
 
       await blogPostService.exists(id);
-      const post = await blogPostService.getBydId(id);
+      const post = await blogPostService.getById(id);
 
       res.status(200).json(post);
     } catch (error) {
