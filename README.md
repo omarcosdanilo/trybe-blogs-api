@@ -1,16 +1,29 @@
-# 🚧 README em construção 🚧
+# Seja bem vindo ao repositório do projeto Blogs API!
 
-<!-- Olá, Tryber!
+<details>
+  <summary><strong>❓ O que é o Blogs API?</strong></summary>
 
-Esse é apenas um arquivo inicial para o README do seu projeto.
+  No Blogs API foi desenvolvido uma API e um banco de dados para a produção de conteúdo para um blog. Foi utilizada a arquitetura MSC (Model, Service, Controller) 
 
-É essencial que você preencha esse documento por conta própria, ok?
+<br />
+</details>
 
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
+<details>
+  <summary><strong>🖥️ Tecnologias utilizadas</strong></summary>
 
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
+ * JavaScript
+ * NodeJS
+ * Express
+ * MySQL
+ * Sequelize
+ * Docker
+ * JWT
 
--->
+<br />
+</details>
+
+<details>
+  <summary><strong>🐋 Como executar o projeto</strong></summary>
+
+  <br/>
+</details>
