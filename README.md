@@ -23,7 +23,12 @@
 </details>
 
 <details>
-  <summary><strong>Informações importantes </strong></summary>
+  <summary  id="diagrama"><strong>🎲 Diagrama ER e Entidades</strong></summary>
+  
+  #### Diagrama de Entidade-Relacionamento
+
+  ![DER](./public/der.png)
+  
 </details>
 
 <details>
