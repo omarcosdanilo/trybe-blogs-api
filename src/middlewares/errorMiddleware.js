@@ -4,10 +4,10 @@ const errorMiddleware = (err, _req, res, _next) => {
   }
   
   // Tratamento de erro 500
-  // if (err.status === 500) {
-  //   console.error(err.message);
-  //   return res.sendStatus(500);
-  // }
+  if (err.status === 500) {
+    console.error(err.message);
+    return res.sendStatus(500);
+  }
 
   res.status(err.name).json({ message: err.message });
 };
