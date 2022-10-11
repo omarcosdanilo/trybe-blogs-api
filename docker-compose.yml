@@ -10,8 +10,8 @@ services:
     tty: true
     stdin_open: true
     restart: always
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
     ports:
       - 3000:3000
     environment:
@@ -20,17 +20,17 @@ services:
       HOSTNAME: db
       JWT_SECRET: secretJWT
       
-#   db:
-#     container_name: blogs_api_db
-#     image: mysql:8.0.21
-#     platform: linux/x86_64
-#     restart: always
-#     ports:
-#       - 3306:3306
-#       - 33060:33060
-#     environment:
-#       MYSQL_ROOT_PASSWORD: password
+  db:
+    container_name: blogs_api_db
+    image: mysql:8.0.21
+    platform: linux/x86_64
+    restart: always
+    ports:
+      - 3306:3306
+      - 33060:33060
+    environment:
+      MYSQL_ROOT_PASSWORD: password
 
-# networks:
-#   default:
-#     name: blogs_api_net
+networks:
+  default:
+    name: blogs_api_net
