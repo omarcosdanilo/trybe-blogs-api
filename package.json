@@ -19,7 +19,7 @@
     "swagger-autogen": "^2.21.5",
     "swagger-ui-express": "^4.5.0"
   },
-  "main": "src/server.js",
+  "main": "src/index.js",
   "scripts": {
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "start": "node .",
