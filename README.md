@@ -1,5 +1,9 @@
 # Seja bem vindo ao repositório do projeto Blogs API!
 
+---
+ ### 👉 Endpoint para fazer as requisições: blogsapi.mddev.ml
+---
+ 
 <details>
   <summary><strong>❓ O que é o Blogs API?</strong></summary>
 
@@ -31,78 +35,11 @@
   
 </details>
 
-<details>
-  <summary><strong>🐋 Como executar o projeto</strong></summary>
-  
-  
-  **:warning: Antes de começar, seu docker-compose precisa estar na versão 1.29 ou superior. [Veja aqui](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-pt) ou [na documentação](https://docs.docker.com/compose/install/) como instalá-lo. No primeiro artigo, você pode substituir onde está com `1.26.0` por `1.29.2`.**
-
-> :information_source: Rode os serviços `node` e `db` com o comando `docker-compose up -d --build`.
-
-- Caso tenha algum serviço `mysql` rodando localmente na porta padrão (`3306`), lembre-se de pará-lo ou adapte, caso queria fazer uso da aplicação em containers;
-
- - Esses serviços irão inicializar um container chamado `blogs_api` e outro chamado `blogs_api_db`;
- 
- - A partir daqui você pode rodar o container `blogs_api` via CLI ou abri-lo no VS Code;
- 
-  > :information_source: Use o comando `docker exec -it blogs_api bash`.
-  
-  - Ele te dará acesso ao terminal interativo do container criado pelo compose, que está rodando em segundo plano.
-  
-  > :information_source: Instale as dependências com `npm install`. (Instale dentro do container)
-  <br/>
-</details>
-
-<details>
   <summary><strong>Endpoints</strong></summary>
   
 ---
 
-## 1 - Endpoint POST `/login`
-
-- O endpoint é acessível através do URL `/login`;
-- O corpo da requisição deverá seguir o formato abaixo:
-  ```json
-  {
-    "email": "seuemail@gmail.com",
-    "password": "123456"
-  }
-  ```
-
-<details>
-  <summary><strong>As seguintes validações são feitas:</strong></summary>
-
-  * **[Não é possível fazer login sem todos os campos preenchidos]**
-    - Se a requisição não tiver todos os campos devidamente preenchidos(não pode haver campos em branco), o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
-    ```json
-    {
-      "message": "Some required fields are missing"
-    }
-    ```
-
-  * **[Não é possível fazer login com um usuário que não existe]**
-    - Se a requisição receber um par de `email` e `password` errados/inexistentes, o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
-    ```json
-    {
-      "message": "Invalid fields"
-    }
-    ```
-  
-  * **[É possível fazer login]**
-    - Se o login foi feito com sucesso o resultado retornado será conforme exibido abaixo, com um status http `200`:
-    ```json
-    {
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo1LCJkaXNwbGF5TmFtZSI6InVzdWFyaW8gZGUgdGVzdGUiLCJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImltYWdlIjoibnVsbCJ9LCJpYXQiOjE2MjAyNDQxODcsImV4cCI6MTYyMDY3NjE4N30.Roc4byj6mYakYqd9LTCozU1hd9k_Vw5IWKGL4hcCVG8"
-    }
-    ```
-    > :warning: O token anterior é fictício, o token é gerado a partir da variável de ambiente `JWT_SECRET`, do `payload` da requisição e não contém o atributo `password` em sua construção.
-
-<br />
-</details>
-
----
-
-## 2 - Endpoint POST `/user`
+## 1 - Endpoint POST `/user`
 
 - O endpoint é acessível através do URL `/user`;
 - O endpoint é capaz de adicionar um novo `user` na tabela Users no banco de dados;
@@ -162,6 +99,50 @@
 
 <br />
 </details>
+
+## 2 - Endpoint POST `/login`
+
+- O endpoint é acessível através do URL `/login`;
+- O corpo da requisição deverá seguir o formato abaixo:
+  ```json
+  {
+    "email": "seuemail@gmail.com",
+    "password": "123456"
+  }
+  ```
+
+<details>
+  <summary><strong>As seguintes validações são feitas:</strong></summary>
+
+  * **[Não é possível fazer login sem todos os campos preenchidos]**
+    - Se a requisição não tiver todos os campos devidamente preenchidos(não pode haver campos em branco), o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+    ```json
+    {
+      "message": "Some required fields are missing"
+    }
+    ```
+
+  * **[Não é possível fazer login com um usuário que não existe]**
+    - Se a requisição receber um par de `email` e `password` errados/inexistentes, o resultado retornado deverá ser conforme exibido abaixo, com um status http `400`:
+    ```json
+    {
+      "message": "Invalid fields"
+    }
+    ```
+  
+  * **[É possível fazer login]**
+    - Se o login foi feito com sucesso o resultado retornado será conforme exibido abaixo, com um status http `200`:
+    ```json
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo1LCJkaXNwbGF5TmFtZSI6InVzdWFyaW8gZGUgdGVzdGUiLCJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImltYWdlIjoibnVsbCJ9LCJpYXQiOjE2MjAyNDQxODcsImV4cCI6MTYyMDY3NjE4N30.Roc4byj6mYakYqd9LTCozU1hd9k_Vw5IWKGL4hcCVG8"
+    }
+    ```
+    > :warning: O token anterior é fictício, o token é gerado a partir da variável de ambiente `JWT_SECRET`, do `payload` da requisição e não contém o atributo `password` em sua construção.
+
+<br />
+</details>
+
+---
 
 ## 3 - Endpoint GET `/user`
 
