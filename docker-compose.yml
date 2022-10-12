@@ -5,8 +5,8 @@ services:
     build: .
     user: node
     working_dir: /app
-    volumes:
-      - ./:/app
+    # volumes:
+    #   - ./:/app
     container_name: blogs_api
     tty: true
     stdin_open: true
