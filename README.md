@@ -1,8 +1,4 @@
 # Seja bem vindo ao repositório do projeto Blogs API!
-
----
- ### 👉 Endpoint para fazer as requisições: blogsapi.mddev.ml
----
  
 <details>
   <summary><strong>❓ O que é o Blogs API?</strong></summary>
@@ -34,8 +30,6 @@
   ![DER](./public/der.png)
   
 </details>
-
-  <summary><strong>Endpoints</strong></summary>
   
 ---
 
